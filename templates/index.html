@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information Retrieval System</title>
+    <style>
+	    h1 {
+	    font-family:Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        font-size: 3rem;
+	    }
+
+        .custom-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+	        display: inline;
+        }
+
+        .custom-button:hover {
+            background-color: #158d19; /*#d326b6;*/
+        }
+
+        .marked {
+            background-color: yellow;
+        }
+
+        .book {
+            width: 220px;
+	        height: 220px;
+            display: inline-block;
+            vertical-align: top;
+            align-self: flex-start;
+        }
+
+        .textfield {
+            height: 1.70rem;
+            width: 20rem;
+            border-radius: 8px;
+            border-width: 1.75px;
+            padding-left: 10px; 
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 15px;
+            margin: 0 10px;
+        }
+
+        .textfield:focus {
+            outline-color: #158d19;
+            outline-width: 2.5px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: center;
+            height: 300px;
+        }
+
+        .form {
+            align-self: flex-start;
+            margin-left: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class='book' src="{{url_for('static', filename='book.jpg')}}"/>
+        <div class="form">
+        <h1>Information Retrieval System</h1>
+        <form method="POST" action="/" class="form">
+            <label for="query">Enter your query:</label>
+            <input class="textfield" type="text" id="query" name="query" required>
+            <button type="submit" class="custom-button">Retrieve Documents</button>
+        </form>
+        </div>
+    </div>
+    <div style="width: 80vw;
+                text-overflow: ellipsis;
+                word-wrap: break-word;
+                word-break: keep-all;
+                padding: 0 5rem;">
+        {% if result %}
+        <h2>Search Results:</h2>
+        {% for doc_title, relevance_score,limited_content in result %}
+        <div class="document">
+            <h3>{{ doc_title }} | Relevance Score: {{
+                relevance_score }}</h3>
+            <p>{{ limited_content | safe }}</p>
+            <a href="{{ url_for('read_document', filename=doc_title) }}">Read More</a>
+            <hr>
+        </div>
+        {% endfor %}        
+        {% endif %}
+    </div>
+</body>
+</html>
