@@ -83,4 +83,4 @@ MY code also includes a function to highlight  (on `index.html`) the exact match
 
 ## Authors :black_nib:
 
-* __SAMUELL ABERRA__ <[samkiyya](https://github.com/samkkiyya)>
+* __SAMUELL ABERRA__ <[samkiyya](https://github.com/samkiyya)>
